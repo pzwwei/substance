@@ -2,7 +2,12 @@ import PropertyAnnotation from './PropertyAnnotation'
 import isArrayEqual from '../util/isArrayEqual'
 
 class Marker extends PropertyAnnotation {
+
+  // called when the text inside the marker is changed
+  // e.g. a spell-error should be removed and spell-checking redone
   invalidate() {}
+
+  // called when the marker gets deleted by MarkersManager
   remove() {
     this.getDocument().data.delete(this.id)
   }
@@ -24,5 +29,7 @@ class Marker extends PropertyAnnotation {
 // while having the same interface, Markers should still be treated differently, e.g. not go into the AnnotationIndex
 Marker.prototype._isPropertyAnnotation = false
 Marker.prototype._isMarker = true
+// TODO: I want to rename this class to CustomMarker
+Marker.prototype._isCustomMarker = true
 
 export default Marker
